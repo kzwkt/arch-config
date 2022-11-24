@@ -16,16 +16,12 @@ set $web browser
 set $bl light
 
 
-set $refresh_vol pkill -RTMIN+1 i3blocks
+set $r_vol exec  pkill -RTMIN+1 i3blocks
 
+set $upvol pamixer -i 5 
+set $downvol pamixer -d 5
+set $mute  pamixer -t
 
-set $upvol amixer sset Master 5%+  && $refresh_vol
-set $downvol amixer sset Master 5%-  && $refresh_vol
-set $mute amixer sset Master toggle  && $refresh_vol
-
-set $upmik   amixer -q sset Capture 5%+ 
-set $downmik  amixer -q sset Capture 5%-
-set $mutemik  amixer -q sset Capture toggle
 
 set $WS1 1  Term
 set $WS2 2  Web
@@ -159,9 +155,9 @@ bindsym XF86MonBrightnessDown exec $bl -U 2
 bindsym Control+XF86MonBrightnessUp exec $bl -A 10   
 bindsym Control+XF86MonBrightnessDown exec $bl -U 10
 
-bindsym XF86AudioRaiseVolume exec  $upvol
-bindsym XF86AudioLowerVolume exec  $downvol
-bindsym XF86AudioMute  exec  $mute
+bindsym XF86AudioRaiseVolume exec  $upvol; $r_vol
+bindsym XF86AudioLowerVolume exec  $downvol; $r_vol
+bindsym XF86AudioMute  exec  $mute ; $r_vol
 
 bindsym Control+XF86AudioMute exec $mutemik
 bindsym Control+XF86AudioRaiseVolume exec $upmik  
