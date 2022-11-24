@@ -1,0 +1,158 @@
+[{ 
+    "position": "top",
+
+
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-right": ["custom/ftog","custom/close" ],
+
+
+    
+"sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+
+    
+"tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+
+
+"custom/ftog": {
+        "format": "  " ,
+        "on-click": "swaymsg floating toggle",
+    
+    },
+
+    "custom/close": {
+        "format": "  " ,
+        "on-click": "swaymsg kill"
+    },
+    
+    
+
+},
+
+{
+"position": "bottom",
+
+  "modules-right":["sway/language","pulseaudio", "network", "backlight", "battery", "tray"],
+  "modules-left": ["custom/wofi","custom/term","custom/web","custom/file",],
+  "modules-center": [],
+
+   "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 14,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close"
+   
+},
+
+ "custom/term": {
+        "format": " ",
+        "on-click": "foot"
+    },
+
+  "custom/web": {
+        "format": "  ",
+        "on-click": "firefox"
+    },
+    
+    
+  "custom/file": {
+        "format": "  ",
+        "on-click":"pcmanfm-qt"
+    },
+    
+   "custom/wofi": {
+        "format": "  ",
+        "on-click": "wofi --show drun -I"
+    },
+    
+    "custom/wshot": {
+        "format": " x",
+        "on-click": "wshot"
+    },
+    
+      "custom/code": {
+        "format": "   " ,
+        "on-click": "foot vim"
+      },
+
+    "custom/playerctl": {
+    "format": "{icon}  {}",
+    "return-type": "json",
+    "format-icons": {
+        "Playing": " ",
+        "Paused": " ",
+    },
+    "max-length":70,
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{playerName}}: {{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click": "playerctl play-pause",
+    "on-click-middle":"playerctl previous",
+    "on-click-right":"playerctl next"
+    
+},
+
+    
+"backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""],
+	"on-scroll-up": "brightnessctl s 2%-",
+        "on-scroll-down": "brightnessctl s 2%+",
+    },
+    
+"battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+   
+ "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": " ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{essid} {ifname}: {ipaddr}/{cidr}",
+
+    },
+    
+"pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+  
+"network#speed": {
+"interface" : "wlan0",
+"format-wifi": " {bandwidthUpOctets}  {bandwidthDownOctets}" ,
+"interval": 2
+},
+
+    }]
