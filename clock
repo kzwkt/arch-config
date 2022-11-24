@@ -1,0 +1,12 @@
+#!/bin/sh
+
+sclock=$(date '+%I')
+
+
+case $BLOCK_BUTTON in
+	1) notify-send "This Month" "$(ncal | sed "s/..7m/<b><span color=\"red\">/;s|..27m|</span></b>|")"  ;;
+	3) notify-send "📅 Time/date module" " show the month via \`cal\`" ;;
+	6) foot -e "$EDITOR" "$0" ;;
+esac
+
+date "+%Y %b %d (%a) %I:%M%p"

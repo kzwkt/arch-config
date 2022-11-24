@@ -1,0 +1,15 @@
+command=~/.config/i3blocks/$BLOCK_NAME
+
+
+[volume]
+interval=once
+signal=1
+
+[battery]
+interval=10
+
+[clock]
+interval=60
+
+
+
