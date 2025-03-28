@@ -1,0 +1,33 @@
+download() {
+cd ~/opt	
+curl -O  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+bsdtar xf google-chrome-stable_current_amd64.deb  data.tar.xz
+mkdir tmp
+tar xf data.tar.xz -C tmp/
+mv chrome chrome.old
+mv tmp/opt/google/chrome/ chrome
+rm -r tmp 
+rm data.tar.xz google-chrome-stable_current_amd64.deb
+}
+
+latest=$(curl -s "https://chromiumdash.appspot.com/fetch_releases?channel=Stable&platform=linux&num=1" | jq -r '.[0].version')
+current=$(google-chrome --version | awk '{print $3}')
+
+if [ "$latest" != "$current" ]; then
+echo "Update available"
+echo "Latest version: $latest"
+echo "Current version: $current"
+
+if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
+	echo "Updating Chrome..."
+	download
+	echo "Chrome has been updated to the latest version: $latest"
+	else
+	echo "Update skipped."
+fi
+
+else
+echo "Chrome is up to date"
+fi
+
+
